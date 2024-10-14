@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.jorband'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//DATABASE CONFIG
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.postgresql:postgresql:42.7.4'
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'com.google.code.gson:gson:2.11.0'
+	//SQS AWS Service
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter:3.2.0'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.2.0'
+	//LAMBDA AWS Service
+	implementation group: 'com.amazonaws.serverless', name: 'aws-serverless-java-container-springboot3', version: '2.0.0'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.14.0'
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-function-adapter-aws
+	implementation 'org.springframework.cloud:spring-cloud-function-adapter-aws:3.2.0'
+
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
