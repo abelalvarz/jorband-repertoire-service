@@ -30,7 +30,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{AWS_REGION}}
+        aws-region: ${{ secrets.AWS_REGION }}
 
     # Pass AWS credentials as environment variables to Spring Boot application
     - name: Set environment variables for AWS credentials
@@ -38,11 +38,11 @@ jobs:
       env:
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{AWS_REGION}}
-        AWS_SECRET_SQS_NAME: ${{AWS_SECRET_SQS_NAME}}
-        DATABASE_URL: ${{DATABASE_URL}}
-        DATABASE_USERNAME: ${{DATABASE_USERNAME}}
-        DATABASE_PASSWORD: ${{DATABASE_PASSWORD}}
+        AWS_REGION: ${{ secrets.AWS_REGION}}
+        AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
