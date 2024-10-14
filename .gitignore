@@ -26,6 +26,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 ./build
+.aws-sam
 
 ### NetBeans ###
 /nbproject/private/
