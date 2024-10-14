@@ -1,0 +1,50 @@
+name: Deploy Jorband Repertoire Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout your repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up JDK (Java Development Kit)
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+
+    # Build the project with Maven (or Gradle, depending on your project setup)
+    - name: Build with Gradle
+      run: gradle bootJar
+
+    # Set up AWS credentials from GitHub Secrets
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{AWS_REGION}}
+
+    # Pass AWS credentials as environment variables to Spring Boot application
+    - name: Set environment variables for AWS credentials
+      env:
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{AWS_REGION}}
+        AWS_SECRET_SQS_NAME: ${{AWS_SECRET_SQS_NAME}}
+        DATABASE_URL: ${{DATABASE_URL}}
+        DATABASE_USERNAME: ${{DATABASE_USERNAME}}
+        DATABASE_PASSWORD: ${{DATABASE_PASSWORD}}
+
+    # Deploy with AWS SAM
+    - name: Build and Deploy with AWS SAM
+      run: |
+        sam build
+        sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
