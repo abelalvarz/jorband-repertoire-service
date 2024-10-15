@@ -24,7 +24,6 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: '21'
 
     # Set up AWS credentials from GitHub Secrets
     - name: Configure AWS credentials
