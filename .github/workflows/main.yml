@@ -49,15 +49,16 @@ jobs:
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-
-    - name: Debug app with info
-      run: ./gradlew test --info
+        
     - name: print variables
       run: |
         echo $DATABASE_URL
         echo $DATABASE_NAME
         echo $DATABASE_USERNAME
         echo $DATABASE_PASSWORD
+    - name: Debug app with info
+      run: ./gradlew test --info
+
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
       run: sam build
