@@ -24,6 +24,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
+        java-version: '21'
 
     # Set up AWS credentials from GitHub Secrets
     - name: Configure AWS credentials
@@ -47,6 +48,7 @@ jobs:
 
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
-      run: |
-        sam build
-        sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
+      run: sam build
+      
+    - name: Build and Deploy with AWS SAM
+      run: sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
