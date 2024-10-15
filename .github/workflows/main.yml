@@ -52,6 +52,12 @@ jobs:
 
     - name: Debug app with info
       run: ./gradlew test --info
+    - name: print variables
+      run: |
+        echo $DATABASE_URL
+        echo $DATABASE_NAME
+        echo $DATABASE_USERNAME
+        echo $DATABASE_PASSWORD
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
       run: sam build
