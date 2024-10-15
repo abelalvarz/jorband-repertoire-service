@@ -14,17 +14,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Check Java and Gradle versions
-      run: |
-        java -version
-        ./gradlew -v
-
     # Set up JDK (Java Development Kit)
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
         java-version: '21'
+
+    - name: Check Java and Gradle versions
+      run: |
+        java -version
+        ./gradlew -v
 
     # Set up AWS credentials from GitHub Secrets
     - name: Configure AWS credentials
@@ -49,6 +49,6 @@ jobs:
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
       run: sam build
-      
+
     - name: Build and Deploy with AWS SAM
       run: sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
