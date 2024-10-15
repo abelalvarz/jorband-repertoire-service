@@ -21,6 +21,10 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    - name: Install Aws Sam CLI
+      run: |
+        pip install aws-sam-cli
+
     - name: Dar permisos de ejecución a gradlew
       run: chmod +x gradlew
 
@@ -49,13 +53,14 @@ jobs:
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        
+
     - name: print variables
       run: |
         echo $DATABASE_URL
         echo $DATABASE_NAME
         echo $DATABASE_USERNAME
         echo $DATABASE_PASSWORD
+        
     - name: Debug app with info
       run: ./gradlew test --info
 
