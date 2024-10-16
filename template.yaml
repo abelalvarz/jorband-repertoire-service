@@ -14,6 +14,11 @@ Parameters:
     Description: ID del API Gateway
 
 Resources:
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+
   JorbandRepertoireSqsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -48,7 +53,6 @@ Resources:
         JorbandRepertoireApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            RestApiId: !Ref ApiGatewayId
             Path: /{proxy+}
             Method: ANY
 
