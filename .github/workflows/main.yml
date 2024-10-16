@@ -45,18 +45,18 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
 
-    - name: Debug app with info
-      run: |
-        echo "Testing application... "
-        ./gradlew test --info
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
+#    - name: Debug app with info
+#      run: |
+#        echo "Testing application... "
+#        ./gradlew test --info
+#      env:
+#        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+#        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+#        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+#        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+#        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        AWS_REGION: ${{ secrets.AWS_REGION }}
+#        AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
 
     # Deploy with AWS SAM
     - name: Build with AWS SAM
