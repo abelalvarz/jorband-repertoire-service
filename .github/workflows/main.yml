@@ -69,6 +69,7 @@ jobs:
         MY_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         MY_AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
+        MY_API_GATEWAY_ID: ${{ secrets.MY_API_GATEWAY_ID }}
 
     - name: Deploy with AWS SAM
       run: |
