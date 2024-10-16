@@ -65,16 +65,16 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        MY_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        MY_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        MY_AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
-        MY_API_GATEWAY_ID: ${{ secrets.MY_API_GATEWAY_ID }}
 
     - name: Deploy with AWS SAM
       run: |
         sam deploy --stack-name jorband-repertoire --capabilities CAPABILITY_IAM --resolve-s3
 #                   --parameter-overrides \
+#                      ApiGatewayId=${{ secrets.MY_API_GATEWAY_ID }}
 #                     DBUrl=${{ secrets.DATABASE_URL }} \
 #                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
 #                     DBPassword=${{ secrets.DATABASE_PASSWORD }}
