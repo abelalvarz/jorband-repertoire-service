@@ -25,8 +25,8 @@ jobs:
       run: |
         pip install aws-sam-cli
 
-#    - name: Dar permisos de ejecución a gradlew
-#      run: chmod +x gradlew
+    - name: Dar permisos de ejecución a gradlew
+      run: chmod +x gradlew
 
     # Set up AWS credentials from GitHub Secrets
     - name: Configure AWS credentials
