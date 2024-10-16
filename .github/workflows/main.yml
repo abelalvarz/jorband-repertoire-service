@@ -65,9 +65,9 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        MY_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        MY_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        MY_AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
         MY_API_GATEWAY_ID: ${{ secrets.MY_API_GATEWAY_ID }}
 
