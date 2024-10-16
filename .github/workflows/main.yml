@@ -18,20 +18,15 @@ jobs:
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
         java-version: '21'
+        distribution: 'temurin'
 
     - name: Install Aws Sam CLI
       run: |
         pip install aws-sam-cli
 
-    - name: Dar permisos de ejecución a gradlew
-      run: chmod +x gradlew
-
-    - name: Check Java and Gradle versions
-      run: |
-        java -version
-        ./gradlew -v
+#    - name: Dar permisos de ejecución a gradlew
+#      run: chmod +x gradlew
 
     # Set up AWS credentials from GitHub Secrets
     - name: Configure AWS credentials
@@ -57,8 +52,14 @@ jobs:
         echo $DATABASE_USERNAME
         echo $DATABASE_PASSWORD
 
-#    - name: Debug app with info
-#      run: ./gradlew test --info
+    - name: Debug app with info
+      run: |
+        echo "testing application... "
+        ./gradlew test --info
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
@@ -70,9 +71,7 @@ jobs:
 
     - name: Build and Deploy with AWS SAM
       run: |
-        sam deploy --template-file template.yaml \
-                   --stack-name jorband-repertoire \
-                   --capabilities CAPABILITY_IAM
+        sam deploy --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
 #                   --parameter-overrides \
 #                     DBUrl=${{ secrets.DATABASE_URL }} \
 #                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
