@@ -72,7 +72,7 @@ jobs:
 
     - name: Deploy with AWS SAM
       run: |
-        sam deploy --stack-name jorband-repertoire --capabilities CAPABILITY_IAM --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-2nmsclulnt6p
+        sam deploy --stack-name jorband-repertoire --capabilities CAPABILITY_IAM --resolve-s3
 #                   --parameter-overrides \
 #                     DBUrl=${{ secrets.DATABASE_URL }} \
 #                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
