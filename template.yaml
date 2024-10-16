@@ -8,11 +8,6 @@ Globals:
     Timeout: 20
     MemorySize: 512
 
-Parameters:
-  ApiGatewayId:
-    Type: String
-    Description: ID del API Gateway
-
 Resources:
   ApiGateway:
     Type: AWS::Serverless::Api
