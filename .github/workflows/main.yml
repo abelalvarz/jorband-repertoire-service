@@ -63,14 +63,18 @@ jobs:
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
       run: sam build
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     - name: Build and Deploy with AWS SAM
       run: |
         sam deploy --template-file template.yaml \
                    --stack-name jorband-repertoire \
-                   --capabilities CAPABILITY_IAM \
-                   --parameter-overrides \
-                     DBUrl=${{ secrets.DATABASE_URL }} \
-                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
-                     DBPassword=${{ secrets.DATABASE_PASSWORD }}
+                   --capabilities CAPABILITY_IAM
+#                   --parameter-overrides \
+#                     DBUrl=${{ secrets.DATABASE_URL }} \
+#                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
+#                     DBPassword=${{ secrets.DATABASE_PASSWORD }}
 #      run: sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
