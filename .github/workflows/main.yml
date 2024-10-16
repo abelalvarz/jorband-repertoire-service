@@ -47,12 +47,8 @@ jobs:
       env:
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION}}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_SQS_NAME: ${{ secrets.AWS_SECRET_SQS_NAME }}
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     - name: print variables
       run: |
@@ -61,8 +57,8 @@ jobs:
         echo $DATABASE_USERNAME
         echo $DATABASE_PASSWORD
 
-    - name: Debug app with info
-      run: ./gradlew test --info
+#    - name: Debug app with info
+#      run: ./gradlew test --info
 
     # Deploy with AWS SAM
     - name: Build and Deploy with AWS SAM
@@ -70,3 +66,11 @@ jobs:
 
     - name: Build and Deploy with AWS SAM
       run: sam deploy --no-confirm-changeset --stack-name jorband-repertoire --capabilities CAPABILITY_IAM
+      run: |
+        sam deploy --template-file template.yaml \
+                   --stack-name jorband-repertoire \
+                   --capabilities CAPABILITY_IAM \
+                   --parameter-overrides \
+                     DBUrl=${{ secrets.DATABASE_URL }} \
+                     DBUsername=${{ secrets.DATABASE_USERNAME }} \
+                     DBPassword=${{ secrets.DATABASE_PASSWORD }}

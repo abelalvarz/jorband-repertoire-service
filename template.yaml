@@ -8,6 +8,17 @@ Globals:
     Timeout: 20
     MemorySize: 512
 
+Parameters:
+  DBUrl:
+    Type: String
+    NoEcho: true
+  DBUsername:
+    Type: String
+    NoEcho: true
+  DBPassword:
+    Type: String
+    NoEcho: true
+
 Resources:
   JorbandRepertoireSqsFunction:
     Type: AWS::Serverless::Function
@@ -17,6 +28,11 @@ Resources:
       Runtime: java21
       Description: Jorband Repertoire SQS Function
       MemorySize: 512
+      Environment:
+        Variables:
+          DB_URL: !Ref DBUrl
+          DB_USERNAME: !Ref DBUsername
+          DB_PASSWORD: !Ref DBPassword
       Timeout: 10
       # Function's execution role
       Policies:
@@ -39,9 +55,11 @@ Resources:
       MemorySize: 512
       SnapStart:
         ApplyOn: "PublishedVersions"
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+      Environment:
         Variables:
-          PARAM1: VALUE
+          DB_URL: !Ref DBUrl
+          DB_USERNAME: !Ref DBUsername
+          DB_PASSWORD: !Ref DBPassword
       Events:
         JorbandRepertoireApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
